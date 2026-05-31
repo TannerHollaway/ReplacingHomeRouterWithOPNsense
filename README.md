@@ -1,6 +1,6 @@
 # Home Network Domain Project — OPNsense Firewall/Router Deployment
 
-**Author:** Dakota Hollaway
+Personal notes. This took quite a while with a lot of banging my head against the wall and research. In the end I simply didn't set the static IP correctly before attempting setup. 
 
 ---
 
