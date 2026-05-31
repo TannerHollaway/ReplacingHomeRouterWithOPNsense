@@ -6,7 +6,7 @@ Personal notes. This took quite a while with a lot of banging my head against th
 
 ## Project Overview
 
-This project deploys OPNsense as a dedicated firewall and router on a Dell Optiplex 3040 SFF, replacing a consumer router and establishing the foundation for a fully segmented home network. The setup uses a double NAT topology with the existing ISP router upstream, and OPNsense managing all internal routing, DHCP, DNS, and firewall enforcement.
+This project deploys OPNsense as a dedicated firewall and router on a Dell Optiplex 3040 SFF, replacing a consumer router and establishing the foundation for a fully segmented home network. The setup uses a double NAT topology (later changed to single NAT as double NAT causes issues) with the existing ISP router upstream, and OPNsense managing all internal routing, DHCP, DNS, and firewall enforcement.
 
 This is Part 1 of a multi-part home lab series:
 
@@ -14,7 +14,7 @@ This is Part 1 of a multi-part home lab series:
 - Part 2 — VLAN Segmentation and Multi-SSID Wireless Setup
 - Part 3 — Windows Server 2022 Active Directory Domain
 
-**Skills demonstrated:** network architecture, firewall deployment, physical hardware troubleshooting, subnet planning, DHCP/DNS configuration, double NAT design, and real-world troubleshooting and root cause analysis.
+**Skills demonstrated:** network architecture, firewall deployment, physical hardware troubleshooting, subnet planning, DHCP/DNS configuration, double NAT design (Later changed), and real-world troubleshooting and root cause analysis.
 
 ---
 
@@ -39,9 +39,9 @@ This is Part 1 of a multi-part home lab series:
 ISP Modem → Existing Router → Optiplex WAN (re0) → Optiplex LAN (igb0) → TL-SG108E Switch → EAP225 AP → Wireless devices
 ```
 
-This is a **double NAT** setup. The existing router handles the ISP connection and provides internet to OPNsense via DHCP on the WAN port. OPNsense manages all internal routing, DHCP, DNS, and firewall rules. Client devices never interact directly with the existing router.
+This is a **double NAT** setup which is later changed to single nat. The existing router handles the ISP connection and provides internet to OPNsense via DHCP on the WAN port. OPNsense manages all internal routing, DHCP, DNS, and firewall rules. Client devices never interact directly with the existing router.
 
-**Double NAT trade-off:** Port forwarding from the internet requires configuration on both the existing router and OPNsense. This is acceptable for a home lab focused on internal segmentation and Active Directory.
+**Double NAT trade-off:** Port forwarding from the internet requires configuration on both the existing router and OPNsense. This is acceptable for a home lab focused on internal segmentation and Active Directory. HOWEVER in any other case it is unacceptable and is changed later in the lab. 
 
 ---
 
