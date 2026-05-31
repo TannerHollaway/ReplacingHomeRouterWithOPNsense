@@ -220,3 +220,24 @@ Still in progress
 
 - [Part 2 — VLAN Segmentation and Multi-SSID Wireless Setup](../Part2-VLANs/README.md)
 - [Part 3 — Windows Server 2022 Active Directory Domain](../Part3-ActiveDirectory/README.md)
+
+Updates and Cleanup
+After a review of the project and learning more about opnsense and some more networking concepts, the following issues were identified and resolved.
+
+Update 1 — Bridge Mode Enabled on ISP Router
+Issue identified: The double NAT setup was an incomplete solution and something I didn't know at the time of setup. The correct approach is to put the ISP router into bridge mode so OPNsense receives the WAN IP directly and is the sole NAT device on the network.
+Fix applied: The Zyxel EX5510-B0 was logged into and the ETHWAN connection was changed from Routing mode to Bridge mode under Network Settings > Broadband.
+Show Image
+After enabling bridge mode, the OPNsense WAN interface needed to renew its DHCP lease. This was done from the shell:
+dhclient re0
+Show Image
+Discovery — CGNAT: OPNsense received 100.64.178.195 as its WAN IP. This is a CGNAT address (Carrier-Grade NAT, RFC 6598), meaning the ISP performs NAT at their infrastructure level. A true public IP requires a static IP from the ISP. For all internal lab purposes — VLANs, Active Directory, DNS, firewall rules — CGNAT has no impact.
+Result: Local double NAT eliminated. OPNsense is now the single NAT device on the home network.
+
+Update 2 — Realtek Driver Plugin Installed
+Issue identified: The onboard NIC on the Dell Optiplex 3040 is a Realtek 8168/8111. OPNsense's default FreeBSD Realtek driver is known for stability issues including packet loss and random drops under load. The os-realtek-re community plugin provides a stable replacement driver.
+Fix applied: Plugin installed via System > Firmware > Plugins by searching for os-realtek-re and clicking install.
+Show Image
+Show Image
+OPNsense was rebooted after installation for the new driver to take effect.
+Result: Realtek NIC now running the stable vendor driver. System stability validated post-reboot.
