@@ -214,12 +214,9 @@ Both OPNsense (console option 4) and the EAP225 (8-second reset button hold) wer
 
 ---
 
-## Next Steps
-
-Still in progress
+## Next Step
 
 - [Part 2 — VLAN Segmentation and Multi-SSID Wireless Setup](https://github.com/TannerHollaway/VLAN-Segmentation-and-Multi-SSID-Wireless-Setup)
-- [Part 3 — Windows Server 2022 Active Directory Domain](../Part3-ActiveDirectory/README.md)
 
 After a review of the project and learning more about OPNsense and some more networking concepts, the following issues were identified and resolved.
 
